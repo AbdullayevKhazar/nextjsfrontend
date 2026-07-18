@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
@@ -28,6 +29,7 @@ export default function UpdateCustomerSheet({
   onClose,
   customer,
 }: Props) {
+  const { t } = useTranslation("customers");
   const { mutateAsync, isPending } = useUpdateCustomer();
 
   const {
@@ -66,13 +68,11 @@ export default function UpdateCustomerSheet({
         body: values,
       });
 
-      toast.success("Customer updated successfully.");
+      toast.success(t("customerUpdatedSuccess"));
 
       onClose();
     } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message ?? "Failed to update customer.",
-      );
+      toast.error(error?.response?.data?.message ?? t("customerUpdatedFailed"));
     }
   };
 
@@ -89,18 +89,18 @@ export default function UpdateCustomerSheet({
             <ArrowLeft size={20} />
           </button>
 
-          <h2 className="text-xl font-bold">Edit Customer</h2>
+          <h2 className="text-xl font-bold">{t("editCustomer")}</h2>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-600">
-              Full Name
+              {t("fullName")}
             </label>
 
             <input
               {...register("fullName")}
-              placeholder="John Doe"
+              placeholder={t("fullNamePlaceholder")}
               className="
                 h-14
                 w-full
@@ -123,12 +123,12 @@ export default function UpdateCustomerSheet({
 
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-600">
-              Phone Number
+              {t("phoneNumber")}
             </label>
 
             <input
               {...register("phone")}
-              placeholder="+994..."
+              placeholder={t("phonePlaceholder")}
               className="
                 h-14
                 w-full
@@ -151,12 +151,12 @@ export default function UpdateCustomerSheet({
 
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-600">
-              Location
+              {t("location")}
             </label>
 
             <input
               {...register("location")}
-              placeholder="Baku"
+              placeholder={t("locationPlaceholder")}
               className="
                 h-14
                 w-full
@@ -185,7 +185,7 @@ export default function UpdateCustomerSheet({
             <textarea
               rows={4}
               {...register("note")}
-              placeholder="Optional..."
+              placeholder={t("notePlaceholder")}
               className="
                 w-full
                 rounded-2xl
@@ -221,7 +221,7 @@ export default function UpdateCustomerSheet({
               disabled:opacity-60
             "
           >
-            {isPending ? "Saving..." : "Save Changes"}
+            {isPending ? t("savingButton") : "Save Changes"}
           </button>
         </form>
       </BottomSheet>

@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import i18n from "@/i18n/client";
 
 import { deleteCustomer } from "@/services/customer";
 
@@ -40,11 +41,11 @@ export function useDeleteCustomer() {
         queryClient.setQueryData(key, data);
       });
 
-      toast.error("Failed to delete customer.");
+      toast.error(i18n.t("customerDeletedFailed", { ns: "customers" }));
     },
 
     onSuccess: () => {
-      toast.success("Customer deleted.");
+      toast.success(i18n.t("customerDeletedSuccess", { ns: "customers" }));
     },
 
     onSettled: () => {

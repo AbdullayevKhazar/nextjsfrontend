@@ -3,15 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Settings, BarChart3 } from "lucide-react";
-
-const items = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/reports", label: "Reports", icon: BarChart3 },
-  { href: "/settings", label: "Settings", icon: Settings },
-];
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
+  const { t } = useTranslation("navigation");
   const pathname = usePathname();
+
+  const items = [
+    { href: "/", label: t("homeNav"), icon: Home },
+    { href: "/reports", label: t("reportsNav"), icon: BarChart3 },
+    { href: "/settings", label: t("settingsNav"), icon: Settings },
+  ];
 
   return (
     <nav

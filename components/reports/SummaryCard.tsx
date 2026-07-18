@@ -2,44 +2,45 @@
 
 import { ReportSummary } from "@/services/report";
 import { TrendingUp, ArrowDown, Users, FileText } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   data: ReportSummary;
 }
 
 export default function SummaryCard({ data }: Props) {
+  const { t } = useTranslation("reports");
   const formatValue = (val: number | undefined) => {
     if (val === undefined || val === null) return "₼0";
     return `₼${val.toLocaleString()}`;
   };
-
   const summaryItems = [
     {
-      label: "Total Debt",
+      label: t("totalDebt"),
       value: formatValue(data.debt),
       icon: <TrendingUp size={20} />,
       color: "bg-red-50 text-red-600",
     },
     {
-      label: "Total Payment",
+      label: t("totalPaid"),
       value: formatValue(data.payment),
       icon: <ArrowDown size={20} />,
       color: "bg-emerald-50 text-emerald-600",
     },
     {
-      label: "Current Balance",
+      label: t("currentBalance"),
       value: formatValue(data.balance),
       icon: <TrendingUp size={20} />,
       color: "bg-blue-50 text-blue-600",
     },
     {
-      label: "Transaction Count",
+      label: t("transactionCount"),
       value: data.transactionCount?.toString() || "0",
       icon: <FileText size={20} />,
       color: "bg-purple-50 text-purple-600",
     },
     {
-      label: "Customer Count",
+      label: t("customerCount"),
       value: data.customerCount?.toString() || "0",
       icon: <Users size={20} />,
       color: "bg-orange-50 text-orange-600",
@@ -48,7 +49,9 @@ export default function SummaryCard({ data }: Props) {
 
   return (
     <div className="bg-white rounded-3xl p-5 shadow-sm border border-zinc-100">
-      <h3 className="text-sm font-semibold text-zinc-900 mb-4">Summary</h3>
+      <h3 className="text-sm font-semibold text-zinc-900 mb-4">
+        {t("summary")}
+      </h3>
       <div className="space-y-3">
         {summaryItems.map((item, index) => (
           <div

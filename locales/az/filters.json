@@ -1,0 +1,14 @@
+{
+  "filtersTitle": "Filtrlər",
+  "sortBy": "Sıralamaq",
+  "status": "Status",
+  "showOnlyOverdue": "Yalnız vaxtı keçmiş müştəriləri göstər",
+  "reset": "Sıfırla",
+  "apply": "Tətbiq et",
+  "newest": "Ən Yeni",
+  "oldest": "Ən Köhnə",
+  "aToZ": "A → Z",
+  "zToA": "Z → A",
+  "highestDebt": "Ən Yüksək Borc",
+  "lowestDebt": "Ən Aşağı Borc"
+}

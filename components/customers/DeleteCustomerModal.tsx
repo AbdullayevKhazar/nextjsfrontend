@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import Backdrop from "@/components/shared/Backdrop";
 import BottomSheet from "@/components/shared/BottomSheet";
 import { useDeleteCustomer } from "@/hooks/use-delete-customer";
@@ -15,6 +16,7 @@ export default function DeleteCustomerModal({
   customerId,
   onClose,
 }: Props) {
+  const { t } = useTranslation("customers");
   const { mutate, isPending } = useDeleteCustomer();
 
   const handleDelete = () => {
@@ -32,10 +34,12 @@ export default function DeleteCustomerModal({
       <Backdrop open={open} onClose={onClose} />
 
       <BottomSheet open={open}>
-        <h2 className="text-center text-xl font-bold">Delete customer?</h2>
+        <h2 className="text-center text-xl font-bold">
+          {t("deleteCustomerTitle")}
+        </h2>
 
         <p className="mt-3 text-center text-sm text-zinc-500">
-          This action cannot be undone.
+          {t("deleteWarning")}
         </p>
 
         <div className="mt-8 flex gap-3">
@@ -43,7 +47,7 @@ export default function DeleteCustomerModal({
             onClick={onClose}
             className="h-14 flex-1 rounded-2xl bg-zinc-100 font-semibold"
           >
-            Cancel
+            {t("cancelButton")}
           </button>
 
           <button
@@ -51,7 +55,7 @@ export default function DeleteCustomerModal({
             disabled={isPending}
             className="h-14 flex-1 rounded-2xl bg-red-600 font-semibold text-white disabled:opacity-50"
           >
-            {isPending ? "Deleting..." : "Delete"}
+            {isPending ? t("deletingButton") : t("deleteButton")}
           </button>
         </div>
       </BottomSheet>

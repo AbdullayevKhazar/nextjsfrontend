@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import BottomSheet from "@/components/shared/BottomSheet";
 import Backdrop from "@/components/shared/Backdrop";
 import { useForm } from "react-hook-form";
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export default function AddCustomerSheet({ open, onClose }: Props) {
+  const { t } = useTranslation("customers");
   const { mutateAsync, isPending } = useCreateCustomer();
 
   const {
@@ -32,15 +34,13 @@ export default function AddCustomerSheet({ open, onClose }: Props) {
     try {
       await mutateAsync(values);
 
-      toast.success("Customer created successfully.");
+      toast.success(t("customerCreatedSuccess"));
 
       reset();
 
       onClose();
     } catch (error: any) {
-      toast.error(
-        error?.response?.data?.message ?? "Failed to create customer.",
-      );
+      toast.error(error?.response?.data?.message ?? t("customerCreatedFailed"));
     }
   };
   return (
@@ -56,19 +56,19 @@ export default function AddCustomerSheet({ open, onClose }: Props) {
             <ArrowLeft size={20} />
           </button>
 
-          <h2 className="text-xl font-bold">Add Customer</h2>
+          <h2 className="text-xl font-bold">{t("addCustomer")}</h2>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-600">
-              Full Name
+              {t("fullName")}
             </label>
 
             <input
               {...register("fullName")}
               className="h-14 w-full rounded-2xl border border-zinc-200 px-4 outline-none focus:border-blue-500"
-              placeholder="John Doe"
+              placeholder={t("fullNamePlaceholder")}
             />
 
             {errors.fullName && (
@@ -80,13 +80,13 @@ export default function AddCustomerSheet({ open, onClose }: Props) {
 
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-600">
-              Phone Number
+              {t("phoneNumber")}
             </label>
 
             <input
               {...register("phone")}
               className="h-14 w-full rounded-2xl border border-zinc-200 px-4 outline-none focus:border-blue-500"
-              placeholder="+994..."
+              placeholder={t("phonePlaceholder")}
             />
 
             {errors.phone && (
@@ -98,12 +98,12 @@ export default function AddCustomerSheet({ open, onClose }: Props) {
 
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-600">
-              Location
+              {t("location")}
             </label>
             <input
               {...register("location")}
               className="h-14 w-full rounded-2xl border border-zinc-200 px-4 outline-none focus:border-blue-500"
-              placeholder="Baku"
+              placeholder={t("locationPlaceholder")}
             />
           </div>
 
@@ -112,7 +112,7 @@ export default function AddCustomerSheet({ open, onClose }: Props) {
             disabled={isPending}
             className="mt-6 h-14 w-full rounded-2xl bg-blue-600 text-[15px] font-semibold text-white transition active:scale-[0.98] disabled:opacity-60"
           >
-            {isPending ? "Creating..." : "Create Customer"}
+            {isPending ? t("creatingButton") : t("createCustomerButton")}
           </button>
         </form>
       </BottomSheet>

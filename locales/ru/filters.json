@@ -1,0 +1,14 @@
+{
+  "filtersTitle": "Фильтры",
+  "sortBy": "Сортировать по",
+  "status": "Статус",
+  "showOnlyOverdue": "Показать только просроченные",
+  "reset": "Сброс",
+  "apply": "Применить",
+  "newest": "Новейшие",
+  "oldest": "Старейшие",
+  "aToZ": "A → Z",
+  "zToA": "Z → A",
+  "highestDebt": "Наибольший долг",
+  "lowestDebt": "Наименьший долг"
+}

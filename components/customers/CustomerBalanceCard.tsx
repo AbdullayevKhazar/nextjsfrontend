@@ -1,10 +1,13 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 interface Props {
   balance: number;
 }
 
 export default function CustomerBalanceCard({ balance }: Props) {
+  const { t } = useTranslation("customers");
   const formattedBalance = balance.toLocaleString("az-AZ", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -43,7 +46,7 @@ export default function CustomerBalanceCard({ balance }: Props) {
             ${hasDebt ? "text-red-500" : "text-emerald-600"}
           `}
         >
-          Current Balance
+          {t("currentBalance")}
         </span>
 
         <h2 className="text-4xl font-bold tracking-tight tabular-nums">
@@ -67,7 +70,7 @@ export default function CustomerBalanceCard({ balance }: Props) {
             hasDebt ? "text-red-700" : "text-emerald-700"
           }`}
         >
-          {hasDebt ? "Outstanding Debt" : "No Outstanding Debt"}
+          {hasDebt ? t("outstandingDebt") : t("noOutstandingDebt")}
         </p>
       </div>
     </div>

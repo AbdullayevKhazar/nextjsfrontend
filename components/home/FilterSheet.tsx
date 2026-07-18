@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft, Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import BottomSheet from "@/components/shared/BottomSheet";
 import Backdrop from "@/components/shared/Backdrop";
 import type { CustomerSort } from "@/types/customer";
@@ -20,12 +21,12 @@ const SORT_OPTIONS: {
   label: string;
   value: CustomerSort;
 }[] = [
-  { label: "Newest", value: "created_desc" },
-  { label: "Oldest", value: "created_asc" },
-  { label: "A → Z", value: "name_asc" },
-  { label: "Z → A", value: "name_desc" },
-  { label: "Highest Debt", value: "balance_desc" },
-  { label: "Lowest Debt", value: "balance_asc" },
+  { label: "newest", value: "created_desc" },
+  { label: "oldest", value: "created_asc" },
+  { label: "aToZ", value: "name_asc" },
+  { label: "zToA", value: "name_desc" },
+  { label: "highestDebt", value: "balance_desc" },
+  { label: "lowestDebt", value: "balance_asc" },
 ];
 
 export default function FilterSheet({
@@ -36,6 +37,7 @@ export default function FilterSheet({
   overdue,
   onOverdueChange,
 }: Props) {
+  const { t } = useTranslation("filters");
   return (
     <>
       <Backdrop open={open} onClose={onClose} />
@@ -49,13 +51,13 @@ export default function FilterSheet({
             <ArrowLeft size={20} />
           </button>
 
-          <h2 className="text-xl font-bold">Filters</h2>
+          <h2 className="text-xl font-bold">{t("filtersTitle")}</h2>
         </div>
 
         <div className="space-y-6">
           <div>
             <h3 className="mb-3 text-sm font-semibold text-zinc-500 uppercase tracking-wide">
-              Sort By
+              {t("sortBy")}
             </h3>
 
             <div className="space-y-2">
@@ -77,7 +79,7 @@ export default function FilterSheet({
                         active ? "font-semibold text-blue-600" : "text-zinc-700"
                       }
                     >
-                      {item.label}
+                      {t(item.label as any)}
                     </span>
 
                     {active && <Check size={18} className="text-blue-600" />}
@@ -90,7 +92,7 @@ export default function FilterSheet({
           {/* Overdue */}
           <div>
             <h3 className="mb-3 text-sm font-semibold text-zinc-500 uppercase tracking-wide">
-              Status
+              {t("status")}
             </h3>
 
             <button
@@ -106,7 +108,7 @@ export default function FilterSheet({
                   overdue ? "font-semibold text-red-600" : "text-zinc-700"
                 }
               >
-                Show only overdue customers
+                {t("showOnlyOverdue")}
               </span>
 
               <div
@@ -127,14 +129,14 @@ export default function FilterSheet({
               }}
               className="h-14 flex-1 rounded-2xl border border-zinc-200 font-semibold transition active:scale-[0.98]"
             >
-              Reset
+              {t("reset")}
             </button>
 
             <button
               onClick={onClose}
               className="h-14 flex-1 rounded-2xl bg-blue-600 font-semibold text-white transition active:scale-[0.98]"
             >
-              Apply
+              {t("apply")}
             </button>
           </div>
         </div>

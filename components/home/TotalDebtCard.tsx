@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface TotalDebtCardProps {
   amount: number;
@@ -10,6 +11,7 @@ interface TotalDebtCardProps {
 const STORAGE_KEY = "show-total-debt";
 
 export default function TotalDebtCard({ amount }: TotalDebtCardProps) {
+  const { t } = useTranslation("debt");
   const [showAmount, setShowAmount] = useState(true);
 
   useEffect(() => {
@@ -40,13 +42,13 @@ export default function TotalDebtCard({ amount }: TotalDebtCardProps) {
     >
       <div className="flex items-center justify-between">
         <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">
-          Total Debt
+          {t("totalDebtCard")}
         </p>
 
         <button
           onClick={toggleVisibility}
           className="rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100"
-          aria-label={showAmount ? "Hide amount" : "Show amount"}
+          aria-label={showAmount ? t("hideAmount") : t("showAmount")}
         >
           {showAmount ? <Eye size={18} /> : <EyeOff size={18} />}
         </button>

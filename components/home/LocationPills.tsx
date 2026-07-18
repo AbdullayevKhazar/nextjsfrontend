@@ -1,6 +1,7 @@
 "use client";
 
 import { Location } from "@/types/customer";
+import { useTranslation } from "react-i18next";
 
 interface LocationPillsProps {
   locations: Location[];
@@ -13,6 +14,7 @@ export default function LocationPills({
   selected,
   onChange,
 }: LocationPillsProps) {
+  const { t } = useTranslation("customers");
   return (
     <div
       className="
@@ -44,7 +46,7 @@ export default function LocationPills({
           }
         `}
       >
-        All
+        {t("allPill")}
       </button>
 
       {locations.map((location) => (

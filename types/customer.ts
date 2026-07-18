@@ -18,6 +18,9 @@ export interface Customer {
   lastTransactionAt: string | null;
   lastPaymentAt: string | null;
 
+  reminderEnabled: boolean;
+  lastReminderSentAt: string | null;
+
   createdAt: string;
   updatedAt: string;
 }
@@ -93,4 +96,16 @@ export interface CreateTransactionDto {
   amount: number;
   date: string;
   note?: string;
+}
+
+export interface ReminderLog {
+  _id: string;
+  customerId: string;
+  status: "sent" | "failed" | "skipped";
+  providerResponse: string | null;
+  error: string | null;
+  messageContent: string | null;
+  isFirstReminder: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

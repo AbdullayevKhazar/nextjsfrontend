@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import QueryProvider from "@/providers/query-provider";
 import PWAProvider from "@/providers/PWAProvider";
+import { I18nProvider } from "@/providers/I18nProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,9 +40,11 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <QueryProvider>
-          <PWAProvider>{children}</PWAProvider>
-        </QueryProvider>
+        <I18nProvider>
+          <QueryProvider>
+            <PWAProvider>{children}</PWAProvider>
+          </QueryProvider>
+        </I18nProvider>
         <Toaster richColors position="top-center" closeButton={false} />
       </body>
     </html>

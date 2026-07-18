@@ -3,27 +3,33 @@
 import { useState } from "react";
 import { useParams } from "next/navigation";
 
-import CustomerHeader from "@/components/customers/CustomerHeader";
-import CustomerInfoCard from "@/components/customers/CustomerInfoCard";
-import CustomerBalanceCard from "@/components/customers/CustomerBalanceCard";
-import CustomerActions from "@/components/customers/CustomerAction";
-import TransactionList from "@/components/customers/TransactionList";
-import TransactionModal from "@/components/customers/TransactionModal";
-import UpdateCustomerSheet from "@/components/customers/UpdateCustomerSheet";
-import DeleteCustomerModal from "@/components/customers/DeleteCustomerModal";
-import CustomerInfoCardSkeleton from "@/components/customers/CustomerInfoCardSkeleton";
-import CustomerBalanceCardSkeleton from "@/components/customers/CustomerBalanceCardSkeleton";
-import TransactionCardSkeleton from "@/components/customers/TransactionCardSkeleton";
-import EmptyTransactions from "@/components/customers/EmptyTransactions";
-
 import { useCustomer } from "@/hooks/use-customer";
+
 import { Transaction } from "@/types/customer";
+import {
+  CustomerBalanceCard,
+  CustomerBalanceCardSkeleton,
+  CustomerHeader,
+  CustomerInfoCard,
+  CustomerInfoCardSkeleton,
+  DeleteCustomerModal,
+  EmptyTransactions,
+  TransactionCardSkeleton,
+  TransactionList,
+  TransactionModal,
+  UpdateCustomerSheet,
+} from "@/components/customers";
+import CustomerActions from "@/components/customers/CustomerAction";
 
 export default function CustomerDetailPage() {
   const params = useParams();
   const id = params.id as string;
 
-  const { data: customer, isLoading: isCustomerLoading } = useCustomer(id);
+  const {
+    data: customer,
+    isLoading: isCustomerLoading,
+    refetch,
+  } = useCustomer(id);
 
   const [showEditSheet, setShowEditSheet] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -63,7 +69,7 @@ export default function CustomerDetailPage() {
   const transactions = customer?.transactions ?? [];
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA] pb-28">
+    <main className="min-h-screen bg-[#FAFAFA] pb-28 px-3">
       <CustomerHeader
         rightSlot={
           <div className="flex gap-2">
@@ -114,16 +120,13 @@ export default function CustomerDetailPage() {
         phone={customerData?.phone ?? ""}
         location={customerData?.location}
         publicToken={customerData?.publicToken ?? ""}
+        lastReminderSentAt={customerData?.lastReminderSentAt ?? null}
       />
 
       <div className="mx-auto max-w-md px-5 pt-6">
         <CustomerActions
-          onBorrow={() =>
-            setTransactionModal({ open: true, type: "debt" })
-          }
-          onPayment={() =>
-            setTransactionModal({ open: true, type: "payment" })
-          }
+          onBorrow={() => setTransactionModal({ open: true, type: "debt" })}
+          onPayment={() => setTransactionModal({ open: true, type: "payment" })}
         />
       </div>
 
@@ -140,16 +143,14 @@ export default function CustomerDetailPage() {
                 transaction: tx,
               })
             }
-            onRefresh={() => {}}
+            onRefresh={refetch}
           />
         )}
       </div>
 
       <TransactionModal
         open={transactionModal.open}
-        onClose={() =>
-          setTransactionModal({ open: false, type: "debt" })
-        }
+        onClose={() => setTransactionModal({ open: false, type: "debt" })}
         type={transactionModal.type}
         customerId={id}
         transaction={transactionModal.transaction}

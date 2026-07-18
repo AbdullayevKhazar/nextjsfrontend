@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import EmptyTransactions from "./EmptyTransactions";
 import TransactionCard from "./TransactionCard";
 import TransactionActionMenu from "./TransactionActionMenu";
@@ -12,8 +13,15 @@ interface Props {
   onRefresh?: () => void;
 }
 
-export default function TransactionList({ transactions, onEdit, onDelete, onRefresh }: Props) {
-  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+export default function TransactionList({
+  transactions,
+  onEdit,
+  onDelete,
+  onRefresh,
+}: Props) {
+  const { t } = useTranslation("transactions");
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
   const [isActionMenuOpen, setIsActionMenuOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -46,7 +54,7 @@ export default function TransactionList({ transactions, onEdit, onDelete, onRefr
 
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-bold">Transactions</h2>
+      <h2 className="text-lg font-bold">{t("transactionsList")}</h2>
 
       {transactions.length === 0 ? (
         <EmptyTransactions />

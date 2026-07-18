@@ -8,6 +8,7 @@ interface CustomerCardProps {
   fullName: string;
   location: string;
   balance: number;
+  overdue: boolean;
   onDelete?: (id: string) => void;
 }
 
@@ -17,6 +18,7 @@ export default function CustomerCard({
   location,
   balance,
   onDelete,
+  overdue,
 }: CustomerCardProps) {
   const router = useRouter();
   const timer = useRef<NodeJS.Timeout | null>(null);
@@ -52,23 +54,26 @@ export default function CustomerCard({
       onMouseLeave={handlePressEnd}
       onTouchStart={handlePressStart}
       onTouchEnd={handlePressEnd}
-      className="
-        flex
-        w-full
-        items-center
-        justify-between
-        rounded-[24px]
-        border
-        border-zinc-100
-        bg-white
-        px-5
-        py-4
-        shadow-sm
-        transition
-        active:scale-[0.98]
-        cursor-pointer
-        select-none
-      "
+ className={`
+  flex
+  w-full
+  items-center
+  justify-between
+  rounded-[24px]
+  border
+  px-5
+  py-4
+  shadow-sm
+  transition
+  active:scale-[0.98]
+  cursor-pointer
+  select-none
+  ${
+    overdue
+      ? "border-red-200 bg-red-50"
+      : "border-zinc-100 bg-white"
+  }
+`}
     >
       <div className="flex items-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">

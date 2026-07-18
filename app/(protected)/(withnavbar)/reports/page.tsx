@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import PeriodSelector from "@/components/reports/PeriodSelector";
 import OverviewGrid from "@/components/reports/OverviewGrid";
 import SummaryCard from "@/components/reports/SummaryCard";
@@ -16,6 +17,7 @@ import { useOverview, useReports } from "@/hooks/use-reports";
 type Period = "today" | "thisWeek" | "thisMonth" | "thisYear" | "custom";
 
 export default function ReportsPage() {
+  const { t } = useTranslation("reports");
   const [period, setPeriod] = useState<Period>("today");
   const [dateRange, setDateRange] = useState<{
     from?: string;
@@ -60,18 +62,14 @@ export default function ReportsPage() {
   return (
     <main className="min-h-screen bg-[#FAFAFA] pb-28">
       <section className="mx-auto flex w-full max-w-md flex-col gap-5 px-5 pb-6 pt-6">
-        <h1 className="text-2xl font-bold text-zinc-900">Reports</h1>
+        <h1 className="text-2xl font-bold text-zinc-900">
+          {t("reportsTitle")}
+        </h1>
 
         <PeriodSelector value={period} onChange={handlePeriodChange} />
 
         {isLoading && (
           <>
-            <div className="grid grid-cols-2 gap-3">
-              <OverviewCardSkeleton />
-              <OverviewCardSkeleton />
-              <OverviewCardSkeleton />
-              <OverviewCardSkeleton />
-            </div>
             <SummaryCardSkeleton />
             <CustomerReportCardSkeleton />
           </>
@@ -79,14 +77,8 @@ export default function ReportsPage() {
 
         {isError && (
           <div className="rounded-3xl bg-white p-8 text-center">
-            <p className="text-sm text-zinc-500">
-              Failed to load reports. Please try again.
-            </p>
+            <p className="text-sm text-zinc-500">{t("failedLoadReports")}</p>
           </div>
-        )}
-
-        {!isLoading && !isError && overview && (
-          <OverviewGrid data={overview} />
         )}
 
         {!isLoading && !isError && report && (

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslation } from "react-i18next";
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp, MapPin, Phone } from "lucide-react";
@@ -11,6 +12,7 @@ interface Props {
 
 export default function CustomerReportCard({ customer }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useTranslation("reports");
 
   const formatAmount = (amount: number | undefined) => {
     if (amount === undefined || amount === null) return "₼0";
@@ -62,14 +64,14 @@ export default function CustomerReportCard({ customer }: Props) {
         </div>
 
         <div className="flex gap-4 text-xs">
-          <div>
-            <span className="text-zinc-500">Total Debt: </span>
+          <div className="flex gap-2">
+            <span className="text-zinc-500">{t("totalDebt")} :</span>
             <span className="font-semibold text-zinc-900 tabular-nums">
               {formatAmount(customer.customer.totalDebt)}
             </span>
           </div>
-          <div>
-            <span className="text-zinc-500">Total Paid: </span>
+          <div className="flex gap-2">
+            <span className="text-zinc-500">{t("totalPaid")} :</span>
             <span className="font-semibold text-zinc-900 tabular-nums">
               {formatAmount(customer.customer.totalPaid)}
             </span>

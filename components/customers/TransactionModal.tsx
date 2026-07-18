@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import Backdrop from "@/components/shared/Backdrop";
 import BottomSheet from "@/components/shared/BottomSheet";
 import { useForm } from "react-hook-form";
@@ -32,10 +33,13 @@ export default function TransactionModal({
   customerId,
   transaction,
 }: Props) {
+  const { t } = useTranslation("transactions");
   const isDebt = type === "debt";
   const isEdit = !!transaction;
-  const { mutateAsync: createTransaction, isPending: isCreating } = useCreateTransaction();
-  const { mutateAsync: updateTransaction, isPending: isUpdating } = useUpdateTransaction();
+  const { mutateAsync: createTransaction, isPending: isCreating } =
+    useCreateTransaction();
+  const { mutateAsync: updateTransaction, isPending: isUpdating } =
+    useUpdateTransaction();
   const isPending = isCreating || isUpdating;
 
   const {
@@ -82,8 +86,8 @@ export default function TransactionModal({
         });
         toast.success(
           type === "debt"
-            ? "Debt updated successfully."
-            : "Payment updated successfully.",
+            ? t("debtUpdatedSuccess")
+            : t("paymentUpdatedSuccess"),
         );
       } else {
         await createTransaction({
@@ -93,8 +97,8 @@ export default function TransactionModal({
         });
         toast.success(
           type === "debt"
-            ? "Debt created successfully."
-            : "Payment created successfully.",
+            ? t("debtCreatedSuccess")
+            : t("paymentCreatedSuccess"),
         );
       }
 
@@ -102,7 +106,9 @@ export default function TransactionModal({
 
       onClose();
     } catch (error: any) {
-      toast.error(error?.response?.data?.message ?? "An error occurred.");
+      toast.error(
+        error?.response?.data?.message ?? t("errorOccurred", { ns: "common" }),
+      );
     }
   };
 
@@ -114,10 +120,12 @@ export default function TransactionModal({
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {" "}
           <h2 className="text-2xl font-bold">
-            {isDebt ? "Borrow" : "Pay"}
+            {isDebt ? t("borrow") : t("pay")}
           </h2>
           <div>
-            <label className="mb-2 block text-sm font-medium">Amount</label>
+            <label className="mb-2 block text-sm font-medium">
+              {t("transactionAmount")}
+            </label>
             <input
               type="number"
               step="0.01"
@@ -141,7 +149,9 @@ export default function TransactionModal({
             )}
           </div>
           <div>
-            <label className="mb-2 block text-sm font-medium">Date</label>
+            <label className="mb-2 block text-sm font-medium">
+              {t("transactionDate")}
+            </label>
 
             <input
               type="datetime-local"
@@ -158,7 +168,9 @@ export default function TransactionModal({
             />
           </div>
           <div>
-            <label className="mb-2 block text-sm font-medium">Note</label>
+            <label className="mb-2 block text-sm font-medium">
+              {t("transactionNote")}
+            </label>
 
             <textarea
               rows={4}
@@ -189,10 +201,10 @@ export default function TransactionModal({
   `}
           >
             {isPending
-              ? "Saving..."
+              ? t("savingTransaction")
               : isDebt
-                ? "Create Debt"
-                : "Create Payment"}
+                ? t("createDebtButton")
+                : t("createPaymentButton")}
           </button>
         </form>
       </BottomSheet>

@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface SearchInputProps {
   value: string;
@@ -6,6 +7,7 @@ interface SearchInputProps {
 }
 
 export default function SearchInput({ value, onChange }: SearchInputProps) {
+  const { t } = useTranslation("customers");
   return (
     <div
       className="
@@ -26,7 +28,7 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Search"
+        placeholder={t("searchPlaceholder")}
         className="
           flex-1
           bg-transparent

@@ -1,6 +1,9 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 export default function EmptyTransactions() {
+  const { t } = useTranslation("transactions");
   return (
     <div className="flex flex-col items-center justify-center rounded-3xl bg-white p-12 text-center">
       <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-zinc-50">
@@ -20,11 +23,11 @@ export default function EmptyTransactions() {
         </svg>
       </div>
 
-      <h3 className="text-lg font-semibold text-zinc-900">No transactions yet</h3>
+      <h3 className="text-lg font-semibold text-zinc-900">
+        {t("noTransactionsYet")}
+      </h3>
 
-      <p className="mt-2 text-sm text-zinc-500">
-        Your debt and payment history will appear here.
-      </p>
+      <p className="mt-2 text-sm text-zinc-500">{t("debtPaymentHistory")}</p>
     </div>
   );
 }

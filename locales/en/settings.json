@@ -1,0 +1,22 @@
+{
+  "settingsTitle": "Settings",
+  "backupSection": "Backup",
+  "exportBackup": "Export Backup",
+  "downloadDataDescription": "Download all your data as JSON",
+  "exportingButton": "Exporting...",
+  "importBackup": "Import Backup",
+  "restoreDataDescription": "Restore data from a JSON file",
+  "importingButton": "Importing...",
+  "pleaseSelectJsonFile": "Please select a JSON backup file",
+  "backupExportedSuccess": "Backup exported successfully.",
+  "backupExportFailed": "Failed to export backup.",
+  "backupImportedSuccess": "Backup imported successfully.",
+  "backupImportFailed": "Failed to import backup.",
+  "languageSection": "Language",
+  "az": "Azərbaycan",
+  "en": "English",
+  "ru": "Русский",
+  "accountSection": "Account",
+  "logout": "Logout",
+  "logoutDescription": "Sign out of your account"
+}

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, Calendar } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 type Period = "today" | "thisWeek" | "thisMonth" | "thisYear" | "custom";
 
@@ -12,15 +13,14 @@ interface Props {
 
 export default function PeriodSelector({ value, onChange }: Props) {
   const [showCustomPicker, setShowCustomPicker] = useState(false);
-
-  const periods = [
-    { id: "today" as Period, label: "Today" },
-    { id: "thisWeek" as Period, label: "This Week" },
-    { id: "thisMonth" as Period, label: "This Month" },
-    { id: "thisYear" as Period, label: "This Year" },
-    { id: "custom" as Period, label: "Custom Range" },
+  const { t } = useTranslation("reports");
+  const periods: { id: Period; label: string }[] = [
+    { id: "today", label: t("today") },
+    { id: "thisWeek", label: t("thisWeek") },
+    { id: "thisMonth", label: t("thisMonth") },
+    { id: "thisYear", label: t("thisYear") },
+    { id: "custom", label: t("customRange") },
   ];
-
   const handlePeriodChange = (period: Period) => {
     if (period === "custom") {
       setShowCustomPicker(true);
@@ -102,7 +102,7 @@ export default function PeriodSelector({ value, onChange }: Props) {
                 onChange={(e) => {
                   const startDate = e.target.value;
                   const endDateInput = document.getElementById(
-                    "custom-end-date"
+                    "custom-end-date",
                   ) as HTMLInputElement;
                   if (startDate && endDateInput?.value) {
                     handleCustomDateChange(startDate, endDateInput.value);
@@ -121,7 +121,7 @@ export default function PeriodSelector({ value, onChange }: Props) {
                 onChange={(e) => {
                   const endDate = e.target.value;
                   const startDateInput = document.querySelector(
-                    'input[type="date"]:first-of-type'
+                    'input[type="date"]:first-of-type',
                   ) as HTMLInputElement;
                   if (endDate && startDateInput?.value) {
                     handleCustomDateChange(startDateInput.value, endDate);

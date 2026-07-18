@@ -1,11 +1,14 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
+
 interface Props {
   onBorrow: () => void;
   onPayment: () => void;
 }
 
 export default function CustomerActions({ onBorrow, onPayment }: Props) {
+  const { t } = useTranslation("transactions");
   return (
     <div className="grid grid-cols-2 gap-3">
       <button
@@ -20,7 +23,7 @@ export default function CustomerActions({ onBorrow, onPayment }: Props) {
           active:scale-95
         "
       >
-        Borrow
+        {t("borrow")}
       </button>
 
       <button
@@ -35,7 +38,7 @@ export default function CustomerActions({ onBorrow, onPayment }: Props) {
           active:scale-95
         "
       >
-        Pay
+        {t("pay")}
       </button>
     </div>
   );

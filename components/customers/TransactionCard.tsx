@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Transaction } from "@/types/customer";
 
 interface Props {
@@ -8,10 +9,8 @@ interface Props {
   onLongPress?: () => void;
 }
 
-export default function TransactionCard({
-  transaction,
-  onLongPress,
-}: Props) {
+export default function TransactionCard({ transaction, onLongPress }: Props) {
+  const { t } = useTranslation("transactions");
   const isDebt = transaction.type === "debt";
   const [pressTimer, setPressTimer] = useState<NodeJS.Timeout | null>(null);
 
@@ -65,12 +64,10 @@ export default function TransactionCard({
       <div className="flex items-center justify-between mb-4">
         <span
           className={`px-3 py-1.5 rounded-full text-sm font-semibold ${
-            isDebt
-              ? "bg-red-50 text-red-700"
-              : "bg-green-50 text-green-700"
+            isDebt ? "bg-red-50 text-red-700" : "bg-green-50 text-green-700"
           }`}
         >
-          {isDebt ? "Debt" : "Payment"}
+          {isDebt ? t("debt") : t("payment")}
         </span>
         <span className="text-sm text-zinc-500">
           {formatDate(transaction.createdAt)}

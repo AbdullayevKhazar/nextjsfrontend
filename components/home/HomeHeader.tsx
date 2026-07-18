@@ -1,19 +1,21 @@
 "use client";
 
 import { useAuth } from "@/hooks/use-auth";
+import { useTranslation } from "react-i18next";
 import { Skeleton } from "@/components/shared/Skeleton";
 
-function getGreeting(): string {
+function getGreeting(t: any): string {
   const hour = new Date().getHours();
-  if (hour < 12) return "Good morning";
-  if (hour < 18) return "Good afternoon";
-  return "Good evening";
+  if (hour < 12) return t("goodMorning");
+  if (hour < 18) return t("goodAfternoon");
+  return t("goodEvening");
 }
 
 export default function HomeHeader() {
   const { user, isLoading } = useAuth();
+  const { t } = useTranslation("greetings");
 
-  const greeting = getGreeting();
+  const greeting = getGreeting(t);
   const firstName = user?.fullName?.split(" ")[0] ?? "";
 
   return (
@@ -30,7 +32,7 @@ export default function HomeHeader() {
             {firstName ? "," : ""}
           </p>
           <h1 className="text-[22px] font-bold text-zinc-900">
-            {firstName || "Welcome back"}
+            {firstName || t("welcomeBack", { ns: "greetings" })}
           </h1>
         </>
       )}

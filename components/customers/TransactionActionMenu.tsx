@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Transaction } from "@/types/customer";
 
 interface Props {
@@ -20,6 +21,7 @@ export default function TransactionActionMenu({
   onDelete,
   isDeleting = false,
 }: Props) {
+  const { t } = useTranslation("transactions");
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -105,8 +107,10 @@ export default function TransactionActionMenu({
               </svg>
             </div>
             <div>
-              <p className="font-medium text-zinc-900">Edit</p>
-              <p className="text-sm text-zinc-500">Modify transaction details</p>
+              <p className="font-medium text-zinc-900">{t("edit")}</p>
+              <p className="text-sm text-zinc-500">
+                {t("modifyTransactionDetails")}
+              </p>
             </div>
           </button>
 

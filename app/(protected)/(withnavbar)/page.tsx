@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import AddCustomerSheet from "@/components/customers/AddCustomerSheet";
 import DeleteCustomerModal from "@/components/customers/DeleteCustomerModal";
@@ -21,6 +22,7 @@ import { useLocations } from "@/hooks/use-locations";
 import type { Customer, CustomerFilters, CustomerSort } from "@/types/customer";
 
 export default function Home() {
+  const { t } = useTranslation(["customers", "auth"]);
   const [addOpen, setAddOpen] = useState(false);
 
   const [filterOpen, setFilterOpen] = useState(false);
@@ -56,7 +58,7 @@ export default function Home() {
   if (isLoading) {
     return (
       <main className="flex min-h-screen items-center justify-center">
-        Loading...
+        {t("loading", { ns: "auth" })}
       </main>
     );
   }
@@ -78,12 +80,16 @@ export default function Home() {
           locations={locations ?? []}
         />
 
-        {isFetching && <p className="text-xs text-zinc-400">Searching...</p>}
+        {isFetching && (
+          <p className="text-xs text-zinc-400">
+            {t("searching", { ns: "customers" })}
+          </p>
+        )}
 
         <div className="flex flex-col gap-3">
           {data?.items.length === 0 ? (
             <p className="py-10 text-center text-sm text-zinc-400">
-              No customers found.
+              {t("noCustomersMessage", { ns: "customers" })}
             </p>
           ) : (
             data?.items.map((customer: Customer) => (
@@ -97,6 +103,7 @@ export default function Home() {
                   setSelectedCustomer(customer);
                   setDeleteOpen(true);
                 }}
+                overdue={customer.overdue}
               />
             ))
           )}

@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import i18n from "@/i18n/client";
 import { exportBackup, importBackup } from "@/services/backup";
 
 export function useExportBackup() {
@@ -7,11 +8,11 @@ export function useExportBackup() {
     mutationFn: exportBackup,
 
     onSuccess: () => {
-      toast.success("Backup exported successfully.");
+      toast.success(i18n.t("backupExportedSuccess", { ns: "settings" }));
     },
 
     onError: () => {
-      toast.error("Failed to export backup.");
+      toast.error(i18n.t("backupExportFailed", { ns: "settings" }));
     },
   });
 }
@@ -21,11 +22,11 @@ export function useImportBackup() {
     mutationFn: importBackup,
 
     onSuccess: () => {
-      toast.success("Backup imported successfully.");
+      toast.success(i18n.t("backupImportedSuccess", { ns: "settings" }));
     },
 
     onError: () => {
-      toast.error("Failed to import backup.");
+      toast.error(i18n.t("backupImportFailed", { ns: "settings" }));
     },
   });
 }
