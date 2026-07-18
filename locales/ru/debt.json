@@ -1,0 +1,8 @@
+{
+  "totalDebtCard": "Общий долг",
+  "hideAmount": "Скрыть сумму",
+  "showAmount": "Показать сумму",
+  "whatsappContact": "Контакт WhatsApp",
+  "shareLink": "Поделиться ссылкой",
+  "whatsappMessage": "Привет {fullName}.\n\nВы можете отслеживать информацию о вашем долге здесь:\n\n{publicUrl}"
+}

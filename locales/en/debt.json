@@ -1,0 +1,8 @@
+{
+  "totalDebtCard": "Total Debt",
+  "hideAmount": "Hide amount",
+  "showAmount": "Show amount",
+  "whatsappContact": "WhatsApp contact",
+  "shareLink": "Share Link",
+  "whatsappMessage": "Hi {fullName}.\n\nYou can track your debt information here:\n\n{publicUrl}"
+}

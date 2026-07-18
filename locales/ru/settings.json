@@ -1,0 +1,22 @@
+{
+  "settingsTitle": "Параметры",
+  "backupSection": "Резервная копия",
+  "exportBackup": "Экспортировать резервную копию",
+  "downloadDataDescription": "Загрузите все ваши данные в виде JSON",
+  "exportingButton": "Экспорт...",
+  "importBackup": "Импортировать резервную копию",
+  "restoreDataDescription": "Восстановить данные из файла JSON",
+  "importingButton": "Импорт...",
+  "pleaseSelectJsonFile": "Пожалуйста, выберите файл резервной копии JSON",
+  "backupExportedSuccess": "Резервная копия успешно экспортирована.",
+  "backupExportFailed": "Ошибка при экспорте резервной копии.",
+  "backupImportedSuccess": "Резервная копия успешно импортирована.",
+  "backupImportFailed": "Ошибка при импорте резервной копии.",
+  "languageSection": "Язык",
+  "az": "Azərbaycan",
+  "en": "English",
+  "ru": "Русский",
+  "accountSection": "Аккаунт",
+  "logout": "Выйти",
+  "logoutDescription": "Выйти из аккаунта"
+}

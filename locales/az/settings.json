@@ -1,0 +1,22 @@
+{
+  "settingsTitle": "Tənzimləmələr",
+  "backupSection": "Ehtiyat Nüsxə",
+  "exportBackup": "Ehtiyat Nüsxəni İxraç Et",
+  "downloadDataDescription": "Bütün məlumatlarınızı JSON olaraq yükləyin",
+  "exportingButton": "İxraç Edilir...",
+  "importBackup": "Ehtiyat Nüsxəni İdxal Et",
+  "restoreDataDescription": "Məlumatları JSON faylından bərpa edin",
+  "importingButton": "İdxal Edilir...",
+  "pleaseSelectJsonFile": "Zəhmət olmasa JSON ehtiyat nüsxə faylını seçin",
+  "backupExportedSuccess": "Ehtiyat nüsxə uğurla ixraç edildi.",
+  "backupExportFailed": "Ehtiyat nüsxəni ixraç etmək uğursuz oldu.",
+  "backupImportedSuccess": "Ehtiyat nüsxə uğurla idxal edildi.",
+  "backupImportFailed": "Ehtiyat nüsxəni idxal etmək uğursuz oldu.",
+  "languageSection": "Dil",
+  "az": "Azərbaycan",
+  "en": "English",
+  "ru": "Русский",
+  "accountSection": "Hesab",
+  "logout": "Çıxış",
+  "logoutDescription": "Hesabınızdan çıxın"
+}

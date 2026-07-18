@@ -1,0 +1,14 @@
+{
+  "filtersTitle": "Filters",
+  "sortBy": "Sort By",
+  "status": "Status",
+  "showOnlyOverdue": "Show only overdue customers",
+  "reset": "Reset",
+  "apply": "Apply",
+  "newest": "Newest",
+  "oldest": "Oldest",
+  "aToZ": "A → Z",
+  "zToA": "Z → A",
+  "highestDebt": "Highest Debt",
+  "lowestDebt": "Lowest Debt"
+}

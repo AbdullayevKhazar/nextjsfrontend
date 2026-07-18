@@ -1,0 +1,8 @@
+{
+  "totalDebtCard": "Cəmi Borc",
+  "hideAmount": "Məbləği gizlət",
+  "showAmount": "Məbləği göstər",
+  "whatsappContact": "WhatsApp ilə əlaqə",
+  "shareLink": "Linki Paylaş",
+  "whatsappMessage": "Salam {fullName}.\n\nBorc məlumatınızı buradan izləyə bilərsiniz:\n\n{publicUrl}"
+}
