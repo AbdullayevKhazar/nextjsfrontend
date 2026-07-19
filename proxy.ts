@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 import { defaultLanguage, languages, type Language } from "./i18n/settings";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const language = request.cookies.get("language")?.value as
     | Language
     | undefined;

@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
-    "@serwist/next": "^9.5.11",
     "@tanstack/react-query": "^5.101.2",
     "axios": "^1.18.1",
     "date-fns": "^4.4.0",
@@ -24,7 +23,6 @@
     "react-i18next": "^17.0.9",
     "react-intersection-observer": "^10.0.3",
     "react-number-format": "^5.4.5",
-    "serwist": "^9.5.11",
     "sonner": "^2.0.7",
     "zod": "^4.4.3"
   },
