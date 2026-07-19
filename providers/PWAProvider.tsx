@@ -9,7 +9,9 @@ interface Props {
 export default function PWAProvider({ children }: Props) {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js");
+      void navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
+      });
     }
   }, []);
 

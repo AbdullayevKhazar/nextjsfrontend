@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { I18nextProvider } from "react-i18next";
 
 import i18n from "@/i18n/client";
+import { defaultLanguage } from "@/i18n/settings";
 import { getLanguage } from "@/lib/cookies";
 
 interface I18nProviderProps {
@@ -14,17 +15,34 @@ export function I18nProvider({ children }: I18nProviderProps) {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
+
     const initializeI18n = async () => {
-      const savedLanguage = getLanguage();
+      try {
+        const savedLanguage = getLanguage();
+        const nextLanguage = savedLanguage ?? defaultLanguage;
 
-      if (savedLanguage && i18n.language !== savedLanguage) {
-        await i18n.changeLanguage(savedLanguage);
+        if (i18n.language !== nextLanguage) {
+          await i18n.changeLanguage(nextLanguage);
+        }
+      } catch (error) {
+        console.error("Failed to initialize i18n", error);
+
+        if (i18n.language !== defaultLanguage) {
+          await i18n.changeLanguage(defaultLanguage);
+        }
+      } finally {
+        if (isMounted) {
+          setIsInitialized(true);
+        }
       }
-
-      setIsInitialized(true);
     };
 
-    initializeI18n();
+    void initializeI18n();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   if (!isInitialized) {
