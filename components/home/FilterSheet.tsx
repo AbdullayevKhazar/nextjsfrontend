@@ -12,9 +12,6 @@ interface Props {
 
   sort: CustomerSort;
   onSortChange: (value: CustomerSort) => void;
-
-  overdue: boolean | undefined;
-  onOverdueChange: (value: boolean | undefined) => void;
 }
 
 const SORT_OPTIONS: {
@@ -34,8 +31,6 @@ export default function FilterSheet({
   onClose,
   sort,
   onSortChange,
-  overdue,
-  onOverdueChange,
 }: Props) {
   const { t } = useTranslation("filters");
   return (
@@ -89,43 +84,10 @@ export default function FilterSheet({
             </div>
           </div>
 
-          {/* Overdue */}
-          <div>
-            <h3 className="mb-3 text-sm font-semibold text-zinc-500 uppercase tracking-wide">
-              {t("status")}
-            </h3>
-
-            <button
-              onClick={() => onOverdueChange(overdue ? undefined : true)}
-              className={`flex w-full items-center justify-between rounded-2xl border px-4 py-4 transition ${
-                overdue
-                  ? "border-red-500 bg-red-50"
-                  : "border-zinc-200 bg-white"
-              }`}
-            >
-              <span
-                className={
-                  overdue ? "font-semibold text-red-600" : "text-zinc-700"
-                }
-              >
-                {t("showOnlyOverdue")}
-              </span>
-
-              <div
-                className={`flex h-6 w-6 items-center justify-center rounded-full border ${
-                  overdue ? "border-red-500 bg-red-500" : "border-zinc-300"
-                }`}
-              >
-                {overdue && <Check size={14} className="text-white" />}
-              </div>
-            </button>
-          </div>
-
           <div className="flex gap-3 pt-2">
             <button
               onClick={() => {
                 onSortChange("created_desc");
-                onOverdueChange(undefined);
               }}
               className="h-14 flex-1 rounded-2xl border border-zinc-200 font-semibold transition active:scale-[0.98]"
             >

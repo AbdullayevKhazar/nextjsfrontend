@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { useCustomer } from "@/hooks/use-customer";
 
@@ -23,6 +24,7 @@ import CustomerActions from "@/components/customers/CustomerAction";
 
 export default function CustomerDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const id = params.id as string;
 
   const {
@@ -166,6 +168,7 @@ export default function CustomerDetailPage() {
         open={showDeleteModal}
         customerId={id}
         onClose={() => setShowDeleteModal(false)}
+        onSuccess={() => router.replace("/")}
       />
     </main>
   );

@@ -5,7 +5,6 @@ export function useCustomerFilters() {
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
   const [sort, setSort] = useState("created_desc");
-  const [overdue, setOverdue] = useState<boolean | undefined>(undefined);
   const [page, setPage] = useState(1);
 
   const debouncedSearch = useDebounce(search, 300);
@@ -15,11 +14,10 @@ export function useCustomerFilters() {
       search: debouncedSearch,
       location,
       sort,
-      overdue,
       page,
       limit: 20,
     }),
-    [debouncedSearch, location, sort, overdue, page],
+    [debouncedSearch, location, sort, page],
   );
 
   return {
@@ -33,9 +31,6 @@ export function useCustomerFilters() {
 
     sort,
     setSort,
-
-    overdue,
-    setOverdue,
 
     page,
     setPage,

@@ -19,14 +19,13 @@ export function useHomePage() {
     setLocation,
     sort,
     setSort,
-    overdue,
-    setOverdue,
     page,
     setPage,
   } = useCustomerFilters();
 
-  const { data, isLoading, isFetching, isError, error } =
-    useCustomers(filters as CustomerFilters);
+  const { data, isLoading, isFetching, isError, error } = useCustomers(
+    filters as CustomerFilters,
+  );
 
   const { data: locationsData } = useLocations();
 
@@ -42,10 +41,7 @@ export function useHomePage() {
 
   const hasMore = meta ? page < meta.totalPages : false;
 
-  const activeFilterCount = [
-    sort !== "created_desc",
-    overdue === true,
-  ].filter(Boolean).length;
+  const activeFilterCount = [sort !== "created_desc"].filter(Boolean).length;
 
   const handleLoadMore = useCallback(() => {
     if (hasMore && !isFetching) {
@@ -73,7 +69,7 @@ export function useHomePage() {
       setLocation(value);
       setPage(1);
     },
-    [setLocation, setPage]
+    [setLocation, setPage],
   );
 
   const handleSearchChange = useCallback(
@@ -81,7 +77,7 @@ export function useHomePage() {
       setSearch(value);
       setPage(1);
     },
-    [setSearch, setPage]
+    [setSearch, setPage],
   );
 
   const handleSortChange = useCallback(
@@ -89,15 +85,7 @@ export function useHomePage() {
       setSort(value);
       setPage(1);
     },
-    [setSort, setPage]
-  );
-
-  const handleOverdueChange = useCallback(
-    (value: boolean | undefined) => {
-      setOverdue(value);
-      setPage(1);
-    },
-    [setOverdue, setPage]
+    [setSort, setPage],
   );
 
   return {
@@ -120,7 +108,6 @@ export function useHomePage() {
     search,
     location,
     sort,
-    overdue,
     activeFilterCount,
 
     // Pagination
@@ -132,7 +119,6 @@ export function useHomePage() {
     handleSearchChange,
     handleLocationChange,
     handleSortChange,
-    handleOverdueChange,
 
     // Add sheet
     showAddSheet,

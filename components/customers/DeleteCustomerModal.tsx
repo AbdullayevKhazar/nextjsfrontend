@@ -9,12 +9,14 @@ interface Props {
   open: boolean;
   customerId: string | null;
   onClose: () => void;
+  onSuccess?: () => void;
 }
 
 export default function DeleteCustomerModal({
   open,
   customerId,
   onClose,
+  onSuccess,
 }: Props) {
   const { t } = useTranslation("customers");
   const { mutate, isPending } = useDeleteCustomer();
@@ -25,6 +27,7 @@ export default function DeleteCustomerModal({
     mutate(customerId, {
       onSuccess: () => {
         onClose();
+        onSuccess?.();
       },
     });
   };

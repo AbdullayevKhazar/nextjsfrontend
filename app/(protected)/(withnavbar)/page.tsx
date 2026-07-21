@@ -45,8 +45,6 @@ export default function Home() {
     sort,
     setSort,
 
-    overdue,
-    setOverdue,
   } = useCustomerFilters();
 
   const { data, isLoading, isFetching } = useCustomers(
@@ -117,8 +115,6 @@ export default function Home() {
         onClose={() => setFilterOpen(false)}
         sort={sort as CustomerSort}
         onSortChange={setSort}
-        overdue={overdue}
-        onOverdueChange={setOverdue}
       />
 
       <AddCustomerSheet open={addOpen} onClose={() => setAddOpen(false)} />

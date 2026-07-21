@@ -2,6 +2,11 @@
 
 import { MapPin, MessageCircle, Phone, Share2, User } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import {
+  formatAzerbaijaniPhone,
+  getAzerbaijaniPhoneDigits,
+  normalizeAzerbaijaniPhone,
+} from "@/lib/phone";
 
 interface Props {
   fullName: string;
@@ -21,12 +26,10 @@ export default function CustomerInfoCard({
   lastReminderSentAt,
 }: Props) {
   const { t } = useTranslation(["debt", "customers"]);
-  const phoneDigits = phone.replace(/\D/g, "");
+  const normalizedPhone = normalizeAzerbaijaniPhone(phone);
+  const phoneDigits = getAzerbaijaniPhoneDigits(normalizedPhone);
 
-  const formattedPhone =
-    phoneDigits.length === 12 && phoneDigits.startsWith("994")
-      ? `+994 ${phoneDigits.slice(3, 5)} ${phoneDigits.slice(5, 8)} ${phoneDigits.slice(8, 10)} ${phoneDigits.slice(10)}`
-      : phone;
+  const formattedPhone = formatAzerbaijaniPhone(normalizedPhone);
 
   const formattedLocation = location
     ?.split(" ")
@@ -71,7 +74,7 @@ export default function CustomerInfoCard({
           <Phone size={14} strokeWidth={2.2} />
         </div>
         <a
-          href={`tel:${phoneDigits}`}
+          href={normalizedPhone ? `tel:${normalizedPhone}` : `tel:${phoneDigits}`}
           className="text-sm font-semibold text-zinc-700 hover:text-zinc-900 transition underline-offset-4 hover:underline"
         >
           {formattedPhone}

@@ -10,6 +10,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useExportBackup, useImportBackup } from "@/hooks/use-backup";
 import { useLanguage } from "@/i18n/hooks";
 import { languages, type Language } from "@/i18n/settings";
+import PasskeySetupCard from "@/components/settings/PasskeySetupCard";
 
 export default function SettingsPage() {
   const { t: t_settings } = useTranslation("settings");
@@ -73,6 +74,8 @@ export default function SettingsPage() {
             <p className="text-sm text-zinc-500">{user.email}</p>
           </div>
         )}
+
+        {isAuthenticated && <PasskeySetupCard />}
 
         <div className="space-y-3">
           <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">

@@ -1,6 +1,7 @@
 import { CreateCustomerDto, Location } from "@/types/customer";
 import { api } from "./api";
 import { CreateCustomerSchema } from "@/lib/validations/customer";
+import { normalizeAzerbaijaniPhone } from "@/lib/phone";
 export async function getCustomers(params: {
   search?: string;
   location?: string;
@@ -23,7 +24,10 @@ export async function getLocations() {
 }
 
 export async function createCustomer(dto: CreateCustomerDto) {
-  const { data } = await api.post("/customers", dto);
+  const { data } = await api.post("/customers", {
+    ...dto,
+    phone: normalizeAzerbaijaniPhone(dto.phone),
+  });
 
   return data.data;
 }
@@ -40,7 +44,10 @@ export async function getCustomer(id: string) {
 }
 
 export async function updateCustomer(id: string, body: CreateCustomerSchema) {
-  const { data } = await api.patch(`/customers/${id}`, body);
+  const { data } = await api.patch(`/customers/${id}`, {
+    ...body,
+    phone: normalizeAzerbaijaniPhone(body.phone),
+  });
 
   return data.data;
 }
