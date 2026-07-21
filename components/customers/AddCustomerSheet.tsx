@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import BottomSheet from "@/components/shared/BottomSheet";
@@ -11,7 +12,9 @@ import {
   type CreateCustomerSchema,
 } from "@/lib/validations/customer";
 import { useCreateCustomer } from "@/hooks/use-create-customer";
+import { getErrorMessage } from "@/lib/error";
 import { toast } from "sonner";
+import AzerbaijaniPhoneField from "@/components/ui/AzerbaijaniPhoneField";
 
 interface Props {
   open: boolean;
@@ -21,14 +24,16 @@ interface Props {
 export default function AddCustomerSheet({ open, onClose }: Props) {
   const { t } = useTranslation("customers");
   const { mutateAsync, isPending } = useCreateCustomer();
+  const customerSchema = useMemo(() => createCustomerSchema(t), [t]);
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<CreateCustomerSchema>({
-    resolver: zodResolver(createCustomerSchema),
+    resolver: zodResolver(customerSchema),
   });
   const onSubmit = async (values: CreateCustomerSchema) => {
     try {
@@ -39,8 +44,8 @@ export default function AddCustomerSheet({ open, onClose }: Props) {
       reset();
 
       onClose();
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message ?? t("customerCreatedFailed"));
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error, t("customerCreatedFailed")));
     }
   };
   return (
@@ -79,21 +84,13 @@ export default function AddCustomerSheet({ open, onClose }: Props) {
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-zinc-600">
-              {t("phoneNumber")}
-            </label>
-
-            <input
-              {...register("phone")}
-              className="h-14 w-full rounded-2xl border border-zinc-200 px-4 outline-none focus:border-blue-500"
+            <AzerbaijaniPhoneField
+              control={control}
+              name="phone"
+              label={t("phoneNumber")}
+              error={errors.phone?.message}
               placeholder={t("phonePlaceholder")}
             />
-
-            {errors.phone && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.phone.message}
-              </p>
-            )}
           </div>
 
           <div>

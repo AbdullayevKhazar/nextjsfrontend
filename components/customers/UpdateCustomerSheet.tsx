@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -12,11 +13,13 @@ import BottomSheet from "@/components/shared/BottomSheet";
 
 import { Customer } from "@/types/customer";
 import { useUpdateCustomer } from "@/hooks/use-update-customer";
+import AzerbaijaniPhoneField from "@/components/ui/AzerbaijaniPhoneField";
 
 import {
   createCustomerSchema,
   CreateCustomerInput,
 } from "@/lib/validations/customer";
+import { getErrorMessage } from "@/lib/error";
 
 interface Props {
   open: boolean;
@@ -31,14 +34,16 @@ export default function UpdateCustomerSheet({
 }: Props) {
   const { t } = useTranslation("customers");
   const { mutateAsync, isPending } = useUpdateCustomer();
+  const customerSchema = useMemo(() => createCustomerSchema(t), [t]);
 
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<CreateCustomerInput>({
-    resolver: zodResolver(createCustomerSchema),
+    resolver: zodResolver(customerSchema),
 
     defaultValues: {
       fullName: "",
@@ -71,8 +76,8 @@ export default function UpdateCustomerSheet({
       toast.success(t("customerUpdatedSuccess"));
 
       onClose();
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message ?? t("customerUpdatedFailed"));
+    } catch (error: unknown) {
+      toast.error(getErrorMessage(error, t("customerUpdatedFailed")));
     }
   };
 
@@ -122,31 +127,13 @@ export default function UpdateCustomerSheet({
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-zinc-600">
-              {t("phoneNumber")}
-            </label>
-
-            <input
-              {...register("phone")}
+            <AzerbaijaniPhoneField
+              control={control}
+              name="phone"
+              label={t("phoneNumber")}
+              error={errors.phone?.message}
               placeholder={t("phonePlaceholder")}
-              className="
-                h-14
-                w-full
-                rounded-2xl
-                border
-                border-zinc-200
-                px-4
-                outline-none
-                transition
-                focus:border-blue-500
-              "
             />
-
-            {errors.phone && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.phone.message}
-              </p>
-            )}
           </div>
 
           <div>
@@ -179,7 +166,7 @@ export default function UpdateCustomerSheet({
 
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-600">
-              Note
+              {t("noteLabel")}
             </label>
 
             <textarea
@@ -221,7 +208,7 @@ export default function UpdateCustomerSheet({
               disabled:opacity-60
             "
           >
-            {isPending ? t("savingButton") : "Save Changes"}
+            {isPending ? t("savingButton") : t("saveChanges")}
           </button>
         </form>
       </BottomSheet>

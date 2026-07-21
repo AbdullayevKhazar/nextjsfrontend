@@ -59,7 +59,6 @@ export interface CustomerFilters {
   search: string;
   location: string;
   sort: CustomerSort;
-  overdue?: boolean;
   page: number;
   limit: number;
 }
