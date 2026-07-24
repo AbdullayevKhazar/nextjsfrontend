@@ -84,6 +84,8 @@ export interface Transaction {
 
   note?: string;
 
+  date: string;
+
   createdAt: string;
 }
 

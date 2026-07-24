@@ -1,5 +1,5 @@
 import type { ApiResponse } from "@/types/api";
-import type { LoginDto } from "@/types/auth";
+import type { LoginDto, RegisterDto } from "@/types/auth";
 import { api } from "./api";
 
 interface LoginResponse {
@@ -11,6 +11,15 @@ interface LoginResponse {
 export const login = async (body: LoginDto) => {
   const { data } = await api.post<ApiResponse<LoginResponse>>(
     "/auth/login",
+    body,
+  );
+
+  return data.data;
+};
+
+export const register = async (body: RegisterDto) => {
+  const { data } = await api.post<ApiResponse<LoginResponse>>(
+    "/auth/register",
     body,
   );
 
