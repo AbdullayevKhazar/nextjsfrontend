@@ -64,9 +64,9 @@ api.interceptors.response.use(
     } catch (refreshError) {
       processQueue(refreshError);
 
-      // if (typeof window !== "undefined") {
-      //   window.location.href = "/login";
-      // }
+      if (typeof window !== "undefined" && window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
 
       return Promise.reject(refreshError);
     } finally {
