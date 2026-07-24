@@ -4,6 +4,12 @@ export interface LoginDto {
   password: string;
 }
 
+export interface RegisterDto {
+  fullName: string;
+  email: string;
+  password: string;
+}
+
 export interface User {
   id: string;
   fullName: string;

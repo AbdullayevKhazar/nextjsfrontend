@@ -11,38 +11,37 @@ import Link from "next/link";
 
 import TextField from "@/components/ui/TextField";
 import PrimaryButton from "@/components/ui/PrimaryButton";
-import PasskeySignInButton from "@/components/auth/PasskeySignInButton";
 import { getErrorMessage } from "@/lib/error";
 import { useAuth } from "@/hooks/use-auth";
-import { login } from "@/services/auth";
-import { createLoginSchema } from "@/lib/validations/auth";
+import { register as registerUser } from "@/services/auth";
+import { createRegisterSchema } from "@/lib/validations/auth";
 
-type LoginInput = z.input<ReturnType<typeof createLoginSchema>>;
+type RegisterInput = z.input<ReturnType<typeof createRegisterSchema>>;
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
   const { t } = useTranslation("auth");
   const [isLoading, setIsLoading] = useState(false);
-  const loginSchema = useMemo(() => createLoginSchema(t), [t]);
+  const registerSchema = useMemo(() => createRegisterSchema(t), [t]);
   const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginInput>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<RegisterInput>({
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = async (values: LoginInput) => {
+  const onSubmit = async (values: RegisterInput) => {
     try {
       setIsLoading(true);
-      await login(values);
-      toast.success(t("loginSuccess"));
+      await registerUser(values);
+      toast.success(t("registerSuccess"));
       router.replace("/");
       router.refresh();
     } catch (error: unknown) {
-      toast.error(getErrorMessage(error, t("loginFailed")));
+      toast.error(getErrorMessage(error, t("registerFailed")));
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -72,12 +71,21 @@ export default function LoginPage() {
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-zinc-900">
-            {t("loginTitle")}
+            {t("registerTitle")}
           </h1>
-          <p className="mt-2 text-sm text-zinc-500">{t("signInDescription")}</p>
+          <p className="mt-2 text-sm text-zinc-500">{t("registerDescription")}</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <TextField
+            label={t("fullNameLabel")}
+            type="text"
+            placeholder={t("fullNamePlaceholder")}
+            autoComplete="name"
+            error={errors.fullName?.message}
+            {...register("fullName")}
+          />
+
           <TextField
             label={t("emailLabel")}
             type="email"
@@ -91,35 +99,22 @@ export default function LoginPage() {
             label={t("passwordLabel")}
             type="password"
             placeholder={t("passwordPlaceholder")}
-            autoComplete="current-password"
+            autoComplete="new-password"
             error={errors.password?.message}
             {...register("password")}
           />
 
           <PrimaryButton type="submit" loading={isLoading}>
-            {t("signInButton")}
+            {t("registerButton")}
           </PrimaryButton>
         </form>
 
-        <div className="relative py-1">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-zinc-200" />
-          </div>
-          <div className="relative flex justify-center">
-            <span className="bg-[#FAFAFA] px-3 text-xs font-medium uppercase tracking-[0.2em] text-zinc-400">
-              {t("or")}
-            </span>
-          </div>
-        </div>
-
-        <PasskeySignInButton />
-
-        <div className="text-center pt-2">
+        <div className="text-center">
           <Link
-            href="/register"
+            href="/login"
             className="text-sm font-medium text-blue-600 hover:text-blue-500"
           >
-            {t("dontHaveAccount")}
+            {t("haveAccount")}
           </Link>
         </div>
       </div>

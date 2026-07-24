@@ -70,7 +70,7 @@ export default function TransactionCard({ transaction, onLongPress }: Props) {
           {isDebt ? t("debt") : t("payment")}
         </span>
         <span className="text-sm text-zinc-500">
-          {formatDate(transaction.createdAt)}
+          {formatDate(transaction.date)}
         </span>
       </div>
 

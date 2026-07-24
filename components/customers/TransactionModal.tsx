@@ -62,7 +62,7 @@ export default function TransactionModal({
       reset({
         amount: transaction.amount,
         note: transaction.note || "",
-        date: new Date(transaction.createdAt).toISOString().slice(0, 16),
+        date: new Date(transaction.date).toISOString().slice(0, 16),
       });
     } else {
       reset({
