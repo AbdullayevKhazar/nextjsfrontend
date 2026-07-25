@@ -26,11 +26,11 @@ export default function CustomerBalanceCard({ balance }: Props) {
         p-6
         shadow-sm
         transition-all
-
+        mt-5
         ${
           hasDebt
-            ? "border-red-100 bg-red-50 text-red-900"
-            : "border-emerald-100 bg-emerald-50 text-emerald-900"
+            ? "border-red-100 dark:border-red-900/50 bg-red-50 dark:bg-red-500/10 text-red-900 dark:text-red-100"
+            : "border-emerald-100 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-900 dark:text-emerald-100"
         }
       `}
     >
@@ -43,7 +43,7 @@ export default function CustomerBalanceCard({ balance }: Props) {
             uppercase
             tracking-wider
 
-            ${hasDebt ? "text-red-500" : "text-emerald-600"}
+            ${hasDebt ? "text-red-500 dark:text-red-400" : "text-emerald-600 dark:text-emerald-400"}
           `}
         >
           {t("currentBalance")}
@@ -58,7 +58,7 @@ export default function CustomerBalanceCard({ balance }: Props) {
               text-3xl
               font-semibold
 
-              ${hasDebt ? "text-red-500" : "text-emerald-600"}
+              ${hasDebt ? "text-red-500 dark:text-red-400" : "text-emerald-600 dark:text-emerald-400"}
             `}
           >
             ₼
@@ -67,7 +67,9 @@ export default function CustomerBalanceCard({ balance }: Props) {
 
         <p
           className={`text-sm font-medium ${
-            hasDebt ? "text-red-700" : "text-emerald-700"
+            hasDebt
+              ? "text-red-700 dark:text-red-300"
+              : "text-emerald-700 dark:text-emerald-300"
           }`}
         >
           {hasDebt ? t("outstandingDebt") : t("noOutstandingDebt")}

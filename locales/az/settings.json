@@ -18,5 +18,9 @@
   "ru": "Русский",
   "accountSection": "Hesab",
   "logout": "Çıxış",
-  "logoutDescription": "Hesabınızdan çıxın"
+  "logoutDescription": "Hesabınızdan çıxın",
+  "themeSection": "Mövzu",
+  "themeSystem": "Sistem",
+  "themeLight": "Açıq",
+  "themeDark": "Tünd"
 }

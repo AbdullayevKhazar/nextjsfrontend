@@ -48,7 +48,7 @@ export default function DeleteCustomerModal({
         <div className="mt-8 flex gap-3">
           <button
             onClick={onClose}
-            className="h-14 flex-1 rounded-2xl bg-zinc-100 font-semibold"
+            className="h-14 flex-1 rounded-2xl border font-semibold "
           >
             {t("cancelButton")}
           </button>

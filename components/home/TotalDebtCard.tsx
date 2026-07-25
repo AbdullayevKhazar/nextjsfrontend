@@ -33,11 +33,11 @@ export default function TotalDebtCard({ amount }: TotalDebtCardProps) {
     <section
       className="
         rounded-[28px]
-        bg-white
+        bg-white dark:bg-zinc-900
         p-6
         shadow-sm
         border
-        border-zinc-100
+        border-zinc-100 dark:border-zinc-800
       "
     >
       <div className="flex items-center justify-between">
@@ -47,7 +47,7 @@ export default function TotalDebtCard({ amount }: TotalDebtCardProps) {
 
         <button
           onClick={toggleVisibility}
-          className="rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100"
+          className="rounded-full p-2 text-zinc-500 transition hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
           aria-label={showAmount ? t("hideAmount") : t("showAmount")}
         >
           {showAmount ? <Eye size={18} /> : <EyeOff size={18} />}

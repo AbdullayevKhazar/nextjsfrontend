@@ -17,8 +17,8 @@ export default function SearchInput({ value, onChange }: SearchInputProps) {
         gap-3
         rounded-[18px]
         border
-        border-zinc-200
-        bg-white
+        border-zinc-200 dark:border-zinc-800
+        bg-white dark:bg-zinc-900
         px-4
         h-[44px]
       "
