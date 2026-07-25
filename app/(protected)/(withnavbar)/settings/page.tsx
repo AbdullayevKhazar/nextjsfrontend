@@ -11,6 +11,7 @@ import { useExportBackup, useImportBackup } from "@/hooks/use-backup";
 import { useLanguage } from "@/i18n/hooks";
 import { languages, type Language } from "@/i18n/settings";
 import PasskeySetupCard from "@/components/settings/PasskeySetupCard";
+import { ThemeToggle } from "@/components/settings/ThemeToggle";
 
 export default function SettingsPage() {
   const { t: t_settings } = useTranslation("settings");
@@ -57,18 +58,18 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA] pb-28">
+    <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950 pb-28">
       <section className="mx-auto flex w-full max-w-md flex-col gap-5 px-5 pt-6">
-        <h1 className="text-2xl font-bold text-zinc-900">
+        <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
           {t_settings("settingsTitle")}
         </h1>
 
         {isAuthenticated && user && (
-          <div className="rounded-3xl bg-white p-5 shadow-sm border border-zinc-100">
+          <div className="rounded-3xl bg-white dark:bg-zinc-900 p-5 shadow-sm border border-zinc-100 dark:border-zinc-800">
             <p className="text-sm font-medium text-zinc-500">
               {t_auth("signedInAs")}
             </p>
-            <p className="mt-1 text-lg font-semibold text-zinc-900">
+            <p className="mt-1 text-lg font-semibold text-zinc-900 dark:text-zinc-100">
               {user.fullName}
             </p>
             <p className="text-sm text-zinc-500">{user.email}</p>
@@ -82,7 +83,7 @@ export default function SettingsPage() {
             {t_settings("languageSection")}
           </h2>
 
-          <div className="flex w-full gap-2 rounded-2xl bg-white p-2 shadow-sm border border-zinc-100">
+          <div className="flex w-full gap-2 rounded-2xl bg-white dark:bg-zinc-900 p-2 shadow-sm border border-zinc-100 dark:border-zinc-800">
             {languages.map((lang) => (
               <button
                 key={lang}
@@ -99,6 +100,8 @@ export default function SettingsPage() {
           </div>
         </div>
 
+        <ThemeToggle />
+
         <div className="space-y-3">
           <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">
             {t_settings("backupSection")}
@@ -107,13 +110,13 @@ export default function SettingsPage() {
           <button
             onClick={() => exportBackup()}
             disabled={isExporting}
-            className="flex w-full items-center gap-3 rounded-2xl bg-white p-4 shadow-sm border border-zinc-100 transition active:scale-[0.98] disabled:opacity-50"
+            className="flex w-full items-center gap-3 rounded-2xl bg-white dark:bg-zinc-900 p-4 shadow-sm border border-zinc-100 dark:border-zinc-800 transition active:scale-[0.98] disabled:opacity-50 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400">
               <Download size={20} />
             </div>
             <div className="text-left">
-              <p className="text-sm font-semibold text-zinc-900">
+              <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {isExporting
                   ? t_settings("exportingButton")
                   : t_settings("exportBackup")}
@@ -127,13 +130,13 @@ export default function SettingsPage() {
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={isImporting}
-            className="flex w-full items-center gap-3 rounded-2xl bg-white p-4 shadow-sm border border-zinc-100 transition active:scale-[0.98] disabled:opacity-50"
+            className="flex w-full items-center gap-3 rounded-2xl bg-white dark:bg-zinc-900 p-4 shadow-sm border border-zinc-100 dark:border-zinc-800 transition active:scale-[0.98] disabled:opacity-50 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
               <Upload size={20} />
             </div>
             <div className="text-left">
-              <p className="text-sm font-semibold text-zinc-900">
+              <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                 {isImporting
                   ? t_settings("importingButton")
                   : t_settings("importBackup")}
@@ -159,9 +162,9 @@ export default function SettingsPage() {
 
           <button
             onClick={handleLogout}
-            className="flex w-full items-center gap-3 rounded-2xl bg-white p-4 shadow-sm border border-zinc-100 transition active:scale-[0.98]"
+            className="flex w-full items-center gap-3 rounded-2xl bg-white dark:bg-zinc-900 p-4 shadow-sm border border-zinc-100 dark:border-zinc-800 transition active:scale-[0.98] hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-50 text-red-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400">
               <LogOut size={20} />
             </div>
             <div className="text-left">

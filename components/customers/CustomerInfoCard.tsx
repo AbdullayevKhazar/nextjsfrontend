@@ -53,11 +53,11 @@ export default function CustomerInfoCard({
   return (
     <div className="w-full max-w-md mx-auto p-5">
       <div className="flex items-center gap-3.5 mb-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-zinc-50 border border-zinc-100 text-zinc-600 shadow-inner">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 shadow-inner">
           <User size={22} strokeWidth={1.8} />
         </div>
         <div className="overflow-hidden">
-          <h3 className="text-lg font-bold text-zinc-800 tracking-tight truncate">
+          <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-100 tracking-tight truncate">
             {fullName}
           </h3>
           {location && (
@@ -69,13 +69,13 @@ export default function CustomerInfoCard({
         </div>
       </div>
 
-      <div className="flex items-center gap-2.5 px-3.5 py-3 bg-zinc-50 rounded-xl border border-zinc-100/60 mb-5">
-        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-100 text-zinc-500">
+      <div className="flex items-center gap-2.5 px-3.5 py-3 bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border border-zinc-100/60 dark:border-zinc-800/60 mb-5">
+        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400">
           <Phone size={14} strokeWidth={2.2} />
         </div>
         <a
           href={normalizedPhone ? `tel:${normalizedPhone}` : `tel:${phoneDigits}`}
-          className="text-sm font-semibold text-zinc-700 hover:text-zinc-900 transition underline-offset-4 hover:underline"
+          className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100 transition underline-offset-4 hover:underline"
         >
           {formattedPhone}
         </a>
@@ -100,7 +100,7 @@ export default function CustomerInfoCard({
 
           <button
             onClick={shareWhatsapp}
-            className="flex w-full h-11 items-center justify-center gap-2 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-700 font-semibold text-sm transition-all hover:bg-zinc-100 active:scale-[0.98]"
+            className="flex w-full h-11 items-center justify-center gap-2 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-semibold text-sm transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-[0.98]"
           >
             <Share2 size={18} strokeWidth={2.2} />
             {t("shareLink", { ns: "debt" })}

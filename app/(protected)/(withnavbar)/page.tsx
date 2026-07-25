@@ -62,7 +62,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA]">
+    <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
       <section className="mx-auto flex w-full max-w-md flex-col gap-5 px-5 pb-[200px] pt-6">
         <TotalDebtCard amount={data?.summary.totalDebt ?? 0} />
 

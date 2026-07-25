@@ -21,6 +21,7 @@ import {
   UpdateCustomerSheet,
 } from "@/components/customers";
 import CustomerActions from "@/components/customers/CustomerAction";
+import { Delete, Edit, Trash } from "lucide-react";
 
 export default function CustomerDetailPage() {
   const params = useParams();
@@ -43,7 +44,7 @@ export default function CustomerDetailPage() {
 
   if (isCustomerLoading) {
     return (
-      <main className="min-h-screen bg-[#FAFAFA] pb-28">
+      <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950 pb-28">
         <CustomerHeader />
         <CustomerBalanceCardSkeleton />
         <CustomerInfoCardSkeleton />
@@ -61,7 +62,7 @@ export default function CustomerDetailPage() {
 
   if (!customer) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#FAFAFA]">
+      <main className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-950">
         <p className="text-sm text-zinc-500">Customer not found.</p>
       </main>
     );
@@ -71,45 +72,21 @@ export default function CustomerDetailPage() {
   const transactions = customer?.transactions ?? [];
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA] pb-28 px-3">
+    <main className="min-h-screen bg-zinc-50 dark:bg-zinc-950 pb-28 px-3">
       <CustomerHeader
         rightSlot={
           <div className="flex gap-2">
             <button
               onClick={() => setShowEditSheet(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 transition hover:bg-zinc-200"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 transition hover:bg-zinc-200 dark:hover:bg-zinc-700"
             >
-              <svg
-                className="h-5 w-5 text-zinc-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                />
-              </svg>
+              <Edit size={14} />
             </button>
             <button
               onClick={() => setShowDeleteModal(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-red-50 transition hover:bg-red-100"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-red-50 dark:bg-red-500/10 transition hover:bg-red-100 dark:hover:bg-red-500/20"
             >
-              <svg
-                className="h-5 w-5 text-red-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                />
-              </svg>
+              <Trash size={14} />
             </button>
           </div>
         }

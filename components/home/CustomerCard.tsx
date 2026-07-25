@@ -70,26 +70,26 @@ export default function CustomerCard({
   select-none
   ${
     overdue
-      ? "border-red-200 bg-red-50"
-      : "border-zinc-100 bg-white"
+      ? "border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-500/10"
+      : "border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900"
   }
 `}
     >
       <div className="flex items-center gap-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-500/10 text-sm font-bold text-blue-700 dark:text-blue-400">
           {initials}
         </div>
 
         <div className="text-left">
-          <h3 className="text-[15px] font-semibold text-zinc-900">
+          <h3 className="text-[15px] font-semibold text-zinc-900 dark:text-zinc-100">
             {fullName}
           </h3>
 
-          <p className="mt-0.5 text-xs text-zinc-500">{location}</p>
+          <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">{location}</p>
         </div>
       </div>
 
-      <p className="text-[20px] font-bold tabular-nums text-zinc-900">
+      <p className="text-[20px] font-bold tabular-nums text-zinc-900 dark:text-zinc-100">
         ₼{balance.toLocaleString()}
       </p>
     </div>

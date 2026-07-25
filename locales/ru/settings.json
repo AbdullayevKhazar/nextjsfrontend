@@ -18,5 +18,9 @@
   "ru": "Русский",
   "accountSection": "Аккаунт",
   "logout": "Выйти",
-  "logoutDescription": "Выйти из аккаунта"
+  "logoutDescription": "Выйти из аккаунта",
+  "themeSection": "Тема",
+  "themeSystem": "Системная",
+  "themeLight": "Светлая",
+  "themeDark": "Темная"
 }

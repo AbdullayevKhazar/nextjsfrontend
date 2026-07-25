@@ -60,9 +60,9 @@ export default function ReportsPage() {
   const isError = isOverviewError || isReportError;
 
   return (
-    <main className="min-h-screen bg-[#FAFAFA] pb-28">
+    <main className="min-h-screen bg-[#FAFAFA] dark:bg-zinc-950 pb-28">
       <section className="mx-auto flex w-full max-w-md flex-col gap-5 px-5 pb-6 pt-6">
-        <h1 className="text-2xl font-bold text-zinc-900">
+        <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
           {t("reportsTitle")}
         </h1>
 

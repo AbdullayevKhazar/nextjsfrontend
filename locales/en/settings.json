@@ -18,5 +18,9 @@
   "ru": "Русский",
   "accountSection": "Account",
   "logout": "Logout",
-  "logoutDescription": "Sign out of your account"
+  "logoutDescription": "Sign out of your account",
+  "themeSection": "Theme",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark"
 }

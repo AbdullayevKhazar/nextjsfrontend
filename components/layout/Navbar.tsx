@@ -20,7 +20,7 @@ export default function Navbar() {
       style={{
         bottom: "max(18px, env(safe-area-inset-bottom))",
       }}
-      className="fixed left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-2 rounded-full border border-zinc-200/80 bg-white/90 p-2 backdrop-blur-2xl shadow-[0_12px_35px_rgba(0,0,0,.08)] min-w-[310px]"
+      className="fixed left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-2 rounded-full border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-zinc-950/90 p-2 backdrop-blur-2xl shadow-[0_12px_35px_rgba(0,0,0,.08)] dark:shadow-[0_12px_35px_rgba(0,0,0,.3)] min-w-[310px]"
     >
       {items.map(({ href, label, icon: Icon }) => {
         const active = pathname === href;
@@ -45,7 +45,7 @@ export default function Navbar() {
               ${
                 active
                   ? "bg-blue-600 text-white shadow-md"
-                  : "text-zinc-500 hover:bg-zinc-100/80"
+                  : "text-zinc-500 hover:bg-zinc-100/80 dark:text-zinc-400 dark:hover:bg-zinc-800/80"
               }
             `}
           >

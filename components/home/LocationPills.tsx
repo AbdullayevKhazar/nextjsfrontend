@@ -42,7 +42,7 @@ export default function LocationPills({
           ${
             selected === ""
               ? "bg-blue-600 text-white"
-              : "bg-white text-zinc-600 border border-zinc-200"
+              : "bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800"
           }
         `}
       >
@@ -66,7 +66,7 @@ export default function LocationPills({
             ${
               selected === location.name
                 ? "bg-blue-600 text-white"
-                : "bg-white text-zinc-600 border border-zinc-200"
+                : "bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800"
             }
           `}
         >

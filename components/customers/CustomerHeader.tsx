@@ -17,13 +17,13 @@ export default function CustomerHeader({
 
   return (
     !readonly && (
-      <header className="flex items-center justify-between px-5 pt-4">
+      <header className="flex items-center justify-between px-1 pt-4">
         <button
           type="button"
           onClick={() => router.back()}
-          className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-zinc-100 active:scale-95"
+          className="flex h-10 w-10 bg-zink-100 dark:bg-zinc-600 items-center justify-center rounded-full transition hover:bg-zinc-100 active:scale-95"
         >
-          <ArrowLeft size={22} className="text-zinc-900" />
+          <ArrowLeft size={22} className="text-zinc-900 dark:text-white" />
         </button>
 
         {/* Right Action */}
