@@ -56,8 +56,8 @@ export default function RegisterPage() {
 
   if (isAuthLoading) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#FAFAFA]">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-blue-600" />
+      <main className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-950">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 dark:border-zinc-800 border-t-blue-600 dark:border-t-blue-500" />
       </main>
     );
   }
@@ -67,16 +67,21 @@ export default function RegisterPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#FAFAFA] px-5">
+    <main className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-zinc-950 px-5 py-10">
       <div className="w-full max-w-sm space-y-8">
+        
+        {/* Başlıq və Təsvir */}
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-zinc-900">
+          <h1 className="text-2xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
             {t("registerTitle")}
           </h1>
-          <p className="mt-2 text-sm text-zinc-500">{t("registerDescription")}</p>
+          <p className="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            {t("registerDescription")}
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        {/* Qeydiyyat Formu */}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <TextField
             label={t("fullNameLabel")}
             type="text"
@@ -104,19 +109,23 @@ export default function RegisterPage() {
             {...register("password")}
           />
 
-          <PrimaryButton type="submit" loading={isLoading}>
-            {t("registerButton")}
-          </PrimaryButton>
+          <div className="pt-2">
+            <PrimaryButton type="submit" loading={isLoading}>
+              {t("registerButton")}
+            </PrimaryButton>
+          </div>
         </form>
 
-        <div className="text-center">
+        {/* Girişə Keçid Linki */}
+        <div className="text-center pt-2">
           <Link
             href="/login"
-            className="text-sm font-medium text-blue-600 hover:text-blue-500"
+            className="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-500 dark:hover:text-blue-300 transition-colors"
           >
             {t("haveAccount")}
           </Link>
         </div>
+
       </div>
     </main>
   );
