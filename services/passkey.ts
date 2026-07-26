@@ -1,4 +1,5 @@
 import { api } from "./api";
+import { setTokens } from "@/lib/cookies";
 
 import type {
   PublicKeyCredentialCreationOptionsJSON,
@@ -25,7 +26,12 @@ export async function completePasskeyLogin(
 ) {
   const { data } = await api.post(LOGIN_VERIFY_PATH, assertion);
 
-  return data;
+  const authData = data.data;
+  if (authData?.accessToken && authData?.refreshToken) {
+    setTokens(authData.accessToken, authData.refreshToken);
+  }
+
+  return authData;
 }
 
 export async function beginPasskeyRegistration() {

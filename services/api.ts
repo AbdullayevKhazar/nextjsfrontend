@@ -1,8 +1,9 @@
 import axios from "axios";
+import { getAccessToken, getRefreshToken, setTokens, removeTokens } from "@/lib/cookies";
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  withCredentials: true,
+  // withCredentials: true, // No longer needed for HTTP-only cookies
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,7 +12,7 @@ export const api = axios.create({
 let isRefreshing = false;
 
 let failedQueue: {
-  resolve: () => void;
+  resolve: (value?: unknown) => void;
   reject: (error: unknown) => void;
 }[] = [];
 
@@ -26,6 +27,18 @@ const processQueue = (error?: unknown) => {
 
   failedQueue = [];
 };
+
+// Inject access token into every request
+api.interceptors.request.use(
+  (config) => {
+    const token = getAccessToken();
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 api.interceptors.response.use(
   (response) => response,
@@ -56,13 +69,24 @@ api.interceptors.response.use(
     isRefreshing = true;
 
     try {
-      await api.post("/auth/refresh");
+      const refreshToken = getRefreshToken();
+      if (!refreshToken) {
+        throw new Error("No refresh token available");
+      }
+
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
+        refreshToken
+      });
+
+      // Save new tokens
+      setTokens(data.accessToken, data.refreshToken);
 
       processQueue();
 
       return api(originalRequest);
     } catch (refreshError) {
       processQueue(refreshError);
+      removeTokens();
 
       if (
         typeof window !== "undefined" &&
