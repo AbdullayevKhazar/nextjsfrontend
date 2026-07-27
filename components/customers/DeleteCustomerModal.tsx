@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Backdrop from "@/components/shared/Backdrop";
 import BottomSheet from "@/components/shared/BottomSheet";
 import { useDeleteCustomer } from "@/hooks/use-delete-customer";
+import { useLocations } from "@/hooks/use-locations";
 
 interface Props {
   open: boolean;
@@ -20,6 +21,7 @@ export default function DeleteCustomerModal({
 }: Props) {
   const { t } = useTranslation("customers");
   const { mutate, isPending } = useDeleteCustomer();
+  const { refetch: refetchLocation } = useLocations();
 
   const handleDelete = () => {
     if (!customerId) return;
@@ -28,6 +30,7 @@ export default function DeleteCustomerModal({
       onSuccess: () => {
         onClose();
         onSuccess?.();
+        refetchLocation();
       },
     });
   };
